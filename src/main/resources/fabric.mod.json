@@ -1,0 +1,30 @@
+{
+	"schemaVersion": 1,
+	"id": "citrine",
+	"version": "${version}",
+	"name": "Citrine",
+	"description": "An all-in-one library for rendering and overall utilities.",
+	"authors": [
+		"Homak, Lumi"
+	],
+	"license": "MIT",
+	"icon": "assets/citrine/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"org.carpentry.citrine.Citrine"
+		],
+		"client": [
+			"org.carpentry.citrine.CitrineClient"
+		]
+	},
+	"mixins": [
+		"citrine.mixins.json"
+	],
+	"depends": {
+		"fabricloader": ">=0.19.3",
+		"minecraft": "~1.20.1",
+		"java": ">=17",
+		"fabric-api": "*"
+	}
+}
