@@ -5,9 +5,9 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.text.Text;
-import org.carpentry.citrine.item.implement.IOnCritItem;
+import org.carpentry.citrine.api.item.OnCritItem;
 
-public class CustomCritItem extends Item implements IOnCritItem {
+public class CustomCritItem extends Item implements OnCritItem {
     public CustomCritItem(Settings settings) {
         super(settings);
     }

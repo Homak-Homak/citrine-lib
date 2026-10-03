@@ -5,9 +5,9 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.text.Text;
-import org.carpentry.citrine.item.implement.IOnKillItem;
+import org.carpentry.citrine.api.item.OnKillItem;
 
-public class CustomKillItem extends Item implements IOnKillItem {
+public class CustomKillItem extends Item implements OnKillItem {
     public CustomKillItem(Settings settings) {
         super(settings);
     }

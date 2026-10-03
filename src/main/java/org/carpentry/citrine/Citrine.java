@@ -6,8 +6,8 @@ import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.util.Identifier;
 import org.carpentry.citrine.dev.CitrineItems;
-import org.carpentry.citrine.item.implement.IOnKillItem;
-import org.carpentry.citrine.item.implement.IOnUserDeathItem;
+import org.carpentry.citrine.api.item.OnKillItem;
+import org.carpentry.citrine.api.item.OnUserDeathItem;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -21,17 +21,17 @@ public class Citrine implements ModInitializer {
 
 		ServerLivingEntityEvents.ALLOW_DEATH.register(((target, damageSource, damageAmount) -> {
 			if (damageSource.getAttacker() != null && damageSource.getAttacker() instanceof LivingEntity e) {
-				if (e.getMainHandStack().getItem() instanceof IOnKillItem i) {
+				if (e.getMainHandStack().getItem() instanceof OnKillItem i) {
 					boolean doKill = i.onKill(e.getMainHandStack(), e, target);
 					if (!doKill && target.getHealth() <= 0) target.setHealth(1);
 					return doKill;
 				}
 			}
-			if (target.getMainHandStack().getItem() instanceof IOnUserDeathItem i) {
+			if (target.getMainHandStack().getItem() instanceof OnUserDeathItem i) {
 				boolean doKill = i.onDeath(target.getMainHandStack(), target);
 				if (!doKill && target.getHealth() <= 0) target.setHealth(1);
 				return doKill;
-			} else if (target.getOffHandStack().getItem() instanceof IOnUserDeathItem i) {
+			} else if (target.getOffHandStack().getItem() instanceof OnUserDeathItem i) {
 				boolean doKill = i.onDeath(target.getMainHandStack(), target);
 				if (!doKill && target.getHealth() <= 0) target.setHealth(1);
 				return doKill;
@@ -41,6 +41,8 @@ public class Citrine implements ModInitializer {
 
 		LOGGER.info("Citrine initialized.");
 	}
+
+	//TODO: ItemWithSkins, VaryingModelItem, Particle utils, tick schedulers, supporter utils, mod icon, custom font support, unclearable effects, and SO much more 😭😭😭
 
 	public static Identifier id(String path) {
 		return new Identifier(MOD_ID, path);

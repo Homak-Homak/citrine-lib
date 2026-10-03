@@ -5,9 +5,9 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.text.Text;
-import org.carpentry.citrine.item.implement.IOnUserDeathItem;
+import org.carpentry.citrine.api.item.OnUserDeathItem;
 
-public class CustomDeathItem extends Item implements IOnUserDeathItem {
+public class CustomDeathItem extends Item implements OnUserDeathItem {
     public CustomDeathItem(Settings settings) {
         super(settings);
     }
