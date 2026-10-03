@@ -5,6 +5,7 @@ import net.fabricmc.fabric.api.entity.event.v1.ServerLivingEntityEvents;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.util.Identifier;
+import org.carpentry.citrine.dev.CitrineEffects;
 import org.carpentry.citrine.dev.CitrineItems;
 import org.carpentry.citrine.api.item.OnKillItem;
 import org.carpentry.citrine.api.item.OnUserDeathItem;
@@ -17,7 +18,10 @@ public class Citrine implements ModInitializer {
 
 	@Override
 	public void onInitialize() {
-		if (FabricLoader.getInstance().isDevelopmentEnvironment()) CitrineItems.init();
+		if (FabricLoader.getInstance().isDevelopmentEnvironment()) {
+			CitrineItems.init();
+			CitrineEffects.init();
+		}
 
 		ServerLivingEntityEvents.ALLOW_DEATH.register(((target, damageSource, damageAmount) -> {
 			if (damageSource.getAttacker() != null && damageSource.getAttacker() instanceof LivingEntity e) {

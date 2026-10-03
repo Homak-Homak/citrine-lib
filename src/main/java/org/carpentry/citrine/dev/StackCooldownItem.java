@@ -9,10 +9,15 @@ import net.minecraft.text.Text;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.world.World;
+import org.carpentry.citrine.Citrine;
+import org.carpentry.citrine.api.client.flash.FlashEasingType;
+import org.carpentry.citrine.api.client.flash.ScreenFlashManager;
 import org.carpentry.citrine.api.cooldown.StackCooldownManager;
 import org.carpentry.citrine.api.item.OnCritItem;
 import org.carpentry.citrine.api.item.ShieldBreakerItem;
 import org.carpentry.citrine.api.util.TimeUtils;
+
+import java.awt.*;
 
 public class StackCooldownItem extends SwordItem implements OnCritItem, ShieldBreakerItem {
     public StackCooldownItem(Settings settings) {
@@ -23,8 +28,13 @@ public class StackCooldownItem extends SwordItem implements OnCritItem, ShieldBr
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
         ItemStack stack = user.getStackInHand(hand);
 
-        StackCooldownManager.setCooldown(user.getWorld(), stack, 200);
+        StackCooldownManager.setCooldown(user.getWorld(), stack, 40);
         user.sendMessage(Text.literal("Augh"), true);
+
+        if (world.isClient) {
+            //ScreenFlashManager.addFlash(40, new Color(255, 255, 255, 255), FlashEasingType.LINEAR);
+            ScreenFlashManager.addFlash(40, Citrine.id("textures/test/gothamchess_whythefucknot.png"), FlashEasingType.QUAD);
+        }
 
         return TypedActionResult.consume(stack);
     }
