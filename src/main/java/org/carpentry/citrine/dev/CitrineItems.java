@@ -12,6 +12,7 @@ public class CitrineItems {
     public static final Item CUSTOM_KILL = registerItem("kill", new CustomKillItem(new Item.Settings()));
     public static final Item CUSTOM_DEATH = registerItem("death", new CustomDeathItem(new Item.Settings()));
     public static final Item STACK_COOLDOWN = registerItem("stack_cooldown", new StackCooldownItem(new Item.Settings()));
+    public static final Item USE_SPRINT = registerItem("use_sprint", new UseWhileSprintItem(new Item.Settings()));
 
     private static Item registerItem(String name, Item item) {
         return Registry.register(Registries.ITEM, Citrine.id(name), item);
@@ -23,6 +24,7 @@ public class CitrineItems {
             entries.add(CUSTOM_KILL);
             entries.add(CUSTOM_DEATH);
             entries.add(STACK_COOLDOWN);
+            entries.add(USE_SPRINT);
         }));
     }
 }

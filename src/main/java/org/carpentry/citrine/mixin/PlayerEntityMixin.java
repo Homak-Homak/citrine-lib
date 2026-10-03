@@ -5,6 +5,7 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.item.ShieldItem;
 import org.carpentry.citrine.api.cooldown.StackCooldownManager;
 import org.carpentry.citrine.api.item.OnCritItem;
 import org.carpentry.citrine.api.item.ShieldBreakerItem;
@@ -53,10 +54,11 @@ public abstract class PlayerEntityMixin {
 
         PlayerEntity player = (PlayerEntity) (Object) this;
 
-        if (player.getActiveItem().isOf(Items.SHIELD)) {
+        if (player.getActiveItem().getItem() instanceof ShieldItem) {
             player.clearActiveItem();
             player.getWorld().sendEntityStatus(player, (byte) 30);
             player.getItemCooldownManager().set(Items.SHIELD, breaker.getShieldCooldown());
         }
     }
+
 }

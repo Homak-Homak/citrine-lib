@@ -46,7 +46,7 @@ public class Citrine implements ModInitializer {
 		LOGGER.info("Citrine initialized.");
 	}
 
-	//TODO: ItemWithSkins, VaryingModelItem, Particle utils, tick schedulers, supporter utils, mod icon, custom font support, unclearable effects, and SO much more 😭😭😭
+	//TODO: ItemWithSkins, VaryingModelItem, Particle utils, supporter utils, mod icon, custom font support, renderers 😭😭😭
 
 	public static Identifier id(String path) {
 		return new Identifier(MOD_ID, path);
