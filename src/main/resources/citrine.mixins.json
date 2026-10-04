@@ -14,9 +14,6 @@
     "requireAnnotations": true
   },
   "client": [
-    "client.DrawContextMixin",
-    "client.ItemRendererAccessor",
-    "client.ItemRendererMixin",
-    "client.ModelLoaderMixin"
+    "client.DrawContextMixin"
   ]
 }
