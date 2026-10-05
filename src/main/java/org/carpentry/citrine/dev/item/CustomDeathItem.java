@@ -1,4 +1,4 @@
-package org.carpentry.citrine.dev;
+package org.carpentry.citrine.dev.item;
 
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;

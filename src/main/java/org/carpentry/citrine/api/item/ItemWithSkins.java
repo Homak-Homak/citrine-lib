@@ -12,7 +12,7 @@ public interface ItemWithSkins {
         return nbt.contains("skin") ? nbt.getInt("skin") : -1;
     }
 
-    default void setSikin(NbtCompound nbt, int skin) {
+    default void setSkin(NbtCompound nbt, int skin) {
         nbt.putInt("skin", skin);
     }
 }

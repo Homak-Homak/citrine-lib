@@ -9,11 +9,16 @@ import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.sound.SoundEvent;
+import net.minecraft.world.World;
 import org.carpentry.citrine.api.effect.UnclearableStatusEffect;
 import org.carpentry.citrine.api.item.CustomKillSourceItem;
+import org.carpentry.citrine.api.item.OnHitSoundItem;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(LivingEntity.class)
 public abstract class LivingEntityMixin {
@@ -53,5 +58,31 @@ public abstract class LivingEntityMixin {
             }
         }
         return original.call();
+    }
+
+    @Inject(method = "damage", at = @At("TAIL"))
+    private void citrine$customHitSound(DamageSource source, float amount, CallbackInfoReturnable<Boolean> cir) {
+        if (!cir.getReturnValue()) return;
+
+        if (!(source.getAttacker() instanceof LivingEntity attacker)) return;
+        LivingEntity victim = (LivingEntity) (Object) this;
+        World world = victim.getWorld();
+
+        ItemStack stack = attacker.getMainHandStack();
+        if (stack.getItem() instanceof OnHitSoundItem soundItem) {
+            SoundEvent sound = soundItem.getHitSound(world, stack, attacker, victim);
+            if (sound != null) {
+                world.playSound(
+                        null,
+                        victim.getX(),
+                        victim.getY(),
+                        victim.getZ(),
+                        sound,
+                        victim.getSoundCategory(),
+                        soundItem.getVolume(stack),
+                        soundItem.getPitch(stack)
+                );
+            }
+        }
     }
 }

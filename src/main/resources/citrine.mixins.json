@@ -14,9 +14,12 @@
     "requireAnnotations": true
   },
   "client": [
+    "client.ClientPlayerEntityMixin",
     "client.DrawContextMixin",
     "client.ItemRendererAccessor",
     "client.ItemRendererMixin",
-    "client.ModelLoaderMixin"
+    "client.ModelLoaderMixin",
+    "client.PlayerEntityRendererMixin",
+    "client.VaryingModelItemRendererMixin"
   ]
 }

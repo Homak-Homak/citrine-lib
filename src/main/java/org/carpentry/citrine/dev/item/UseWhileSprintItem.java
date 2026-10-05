@@ -1,4 +1,4 @@
-package org.carpentry.citrine.dev;
+package org.carpentry.citrine.dev.item;
 
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ShieldItem;

@@ -1,21 +1,24 @@
-package org.carpentry.citrine.api.util;
+package org.carpentry.citrine.api.util.schedule;
 
-import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
-import net.minecraft.server.MinecraftServer;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
+import net.minecraft.client.MinecraftClient;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.function.IntConsumer;
 
-public class TickSchedulerServer {
+@Environment(EnvType.CLIENT)
+public class TickSchedulerClient {
     private static final List<ScheduledTask> tasks = new CopyOnWriteArrayList<>();
     private static final List<ScheduledTask> tasksToAdd = new ArrayList<>();
     private static final List<RepeatingTask> repeatingTasks = new CopyOnWriteArrayList<>();
     private static final List<RepeatingTask> repeatingTasksToAdd = new ArrayList<>();
 
     static {
-        ServerTickEvents.END_SERVER_TICK.register(TickSchedulerServer::onTick);
+        ClientTickEvents.END_CLIENT_TICK.register(TickSchedulerClient::onTick);
     }
 
     /**
@@ -23,10 +26,8 @@ public class TickSchedulerServer {
      * @param delayTicks Delay of how many ticks to wait before executing the action
      * @param action The action to execute each tick, receives current iteration count (0-indexed)
      */
-    public static ScheduledTask schedule(int delayTicks, Runnable action) {
-        ScheduledTask task = new ScheduledTask(delayTicks, action);
-        tasksToAdd.add(task);
-        return task;
+    public static void schedule(int delayTicks, Runnable action) {
+        tasksToAdd.add(new ScheduledTask(delayTicks, action));
     }
 
     /**
@@ -34,13 +35,11 @@ public class TickSchedulerServer {
      * @param times Number of times to execute the action
      * @param action The action to execute each tick, receives current iteration count (0-indexed)
      */
-    public static RepeatingTask scheduleRepeating(int times, IntConsumer action) {
-        RepeatingTask task = new RepeatingTask(times, action);
-        repeatingTasksToAdd.add(task);
-        return task;
+    public static void scheduleRepeating(int times, IntConsumer action) {
+        repeatingTasksToAdd.add(new RepeatingTask(times, action));
     }
 
-    private static void onTick(MinecraftServer server) {
+    private static void onTick(MinecraftClient client) {
         if (!tasksToAdd.isEmpty()) {
             tasks.addAll(tasksToAdd);
             tasksToAdd.clear();
@@ -78,7 +77,7 @@ public class TickSchedulerServer {
         }
     }
 
-    public static class ScheduledTask {
+    private static class ScheduledTask {
         int ticksLeft;
         Runnable action;
 
@@ -86,13 +85,9 @@ public class TickSchedulerServer {
             this.ticksLeft = ticks;
             this.action = action;
         }
-
-        public void cancel() {
-            this.ticksLeft = -1;
-        }
     }
 
-    public static class RepeatingTask {
+    private static class RepeatingTask {
         int executionsLeft;
         int totalExecutions;
         IntConsumer action;
@@ -101,10 +96,6 @@ public class TickSchedulerServer {
             this.executionsLeft = times;
             this.totalExecutions = times;
             this.action = action;
-        }
-
-        public void cancel() {
-            this.executionsLeft = 0;
         }
     }
 }

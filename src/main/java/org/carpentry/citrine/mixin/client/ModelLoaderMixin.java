@@ -9,6 +9,7 @@ import net.minecraft.registry.Registries;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.profiler.Profiler;
 import org.carpentry.citrine.api.item.ItemWithSkins;
+import org.carpentry.citrine.api.item.VaryingModelItem;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -31,6 +32,12 @@ public abstract class ModelLoaderMixin {
             if (item instanceof ItemWithSkins skinItem) {
                 for (Identifier skinId : skinItem.getSkins()) {
                     this.addModel(new ModelIdentifier(skinId.getNamespace(), skinId.getPath(), "inventory"));
+                }
+            }
+
+            if (item instanceof VaryingModelItem varying) {
+                for (Identifier id : varying.getModels()) {
+                    this.addModel(new ModelIdentifier(id.getNamespace(), id.getPath(), "inventory"));
                 }
             }
         }
