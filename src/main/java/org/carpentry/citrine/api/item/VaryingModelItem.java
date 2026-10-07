@@ -9,7 +9,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 
 public interface VaryingModelItem {
-    // Every model this item can use. All get loaded.
+    // Every model this item can use
     List<Identifier> getModels();
 
     // Return one of getModels(), or null for the item's normal model. holder is null in the GUI.

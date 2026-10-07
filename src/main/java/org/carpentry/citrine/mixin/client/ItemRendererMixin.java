@@ -10,6 +10,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.util.Identifier;
 import org.carpentry.citrine.api.item.ItemWithSkins;
+import org.carpentry.citrine.api.item.VaryingModelItem;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
@@ -23,6 +24,7 @@ public abstract class ItemRendererMixin {
     public BakedModel addModels(BakedModel value, ItemStack stack, ModelTransformationMode mode,
                                 boolean leftHanded, MatrixStack matrices,
                                 VertexConsumerProvider providers, int light, int overlay) {
+        if (stack.getItem() instanceof VaryingModelItem) return value;
         if (!(stack.getItem() instanceof ItemWithSkins skins)) return value;
 
         NbtCompound nbt = stack.getNbt();
@@ -36,6 +38,4 @@ public abstract class ItemRendererMixin {
         return ((ItemRendererAccessor) this).citrine$getModels().getModelManager()
                 .getModel(new ModelIdentifier(skin.getNamespace(), skin.getPath(), "inventory"));
     }
-
-
 }

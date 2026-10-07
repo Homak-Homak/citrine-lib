@@ -41,10 +41,17 @@ public class SkinsItem extends Item implements ItemWithSkins {
     @Override
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
         ItemStack stack = user.getStackInHand(hand);
+        NbtCompound nbt = stack.getOrCreateNbt();
+        int next = getCurrentSkin(stack.getOrCreateNbt()) +1;
 
         if (!world.isClient) {
-            NbtCompound nbt = stack.getOrCreateNbt();
-            setSkin(nbt, (getCurrentSkin(nbt) + 1) % getSkins().size()); // cycles bewteen skins
+            if (next >= getSkins().size()){
+                nbt.remove("skin");
+                if (nbt.isEmpty()){ stack.setNbt(null);
+                }
+            } else{
+                setSkin(nbt, (getCurrentSkin(nbt) + 1) % getSkins().size()); // cycles bewteen skins
+            }
         }
         return TypedActionResult.success(stack, world.isClient);
     }
