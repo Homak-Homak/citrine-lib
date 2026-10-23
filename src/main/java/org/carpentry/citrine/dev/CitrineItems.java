@@ -17,6 +17,7 @@ public class CitrineItems {
     public static final Item SKINS = registerItem("skins", new SkinsItem(new Item.Settings()));
     public static final Item MANY_MODELS = registerItem("models", new ManyModelsItem(new Item.Settings()));
     public static final Item SPEAR = registerItem("spear", new TestSpearItem(new Item.Settings()));
+    public static final Item SUPPORTER = registerItem("supporter", new SupporterOnlyItem(new Item.Settings()));
 
     private static Item registerItem(String name, Item item) {
         return Registry.register(Registries.ITEM, Citrine.id(name), item);
@@ -31,6 +32,7 @@ public class CitrineItems {
             entries.add(USE_SPRINT);
             entries.add(SKINS);
             entries.add(MANY_MODELS);
+            entries.add(SUPPORTER);
         }));
     }
 }

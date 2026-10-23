@@ -9,6 +9,7 @@ import net.minecraft.item.ShieldItem;
 import org.carpentry.citrine.api.cooldown.StackCooldownManager;
 import org.carpentry.citrine.api.item.OnCritItem;
 import org.carpentry.citrine.api.item.ShieldBreakerItem;
+import org.carpentry.citrine.api.util.SupporterUtils;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -60,5 +61,4 @@ public abstract class PlayerEntityMixin {
             player.getItemCooldownManager().set(Items.SHIELD, breaker.getShieldCooldown());
         }
     }
-
 }
