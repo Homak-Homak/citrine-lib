@@ -1,11 +1,16 @@
 package org.carpentry.citrine.mixin;
 
+import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.item.ShieldItem;
+import net.minecraft.text.Text;
+import net.minecraft.world.World;
+import org.carpentry.citrine.Citrine;
 import org.carpentry.citrine.api.cooldown.StackCooldownManager;
 import org.carpentry.citrine.api.item.OnCritItem;
 import org.carpentry.citrine.api.item.ShieldBreakerItem;
@@ -16,7 +21,10 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(PlayerEntity.class)
-public abstract class PlayerEntityMixin {
+public abstract class PlayerEntityMixin extends LivingEntity {
+    protected PlayerEntityMixin(EntityType<? extends LivingEntity> entityType, World world) {
+        super(entityType, world);
+    }
 
     @Inject(method = "tick", at = @At("TAIL"))
     private void citrine$cleanupCooldowns(CallbackInfo ci) {
@@ -60,5 +68,12 @@ public abstract class PlayerEntityMixin {
             player.getWorld().sendEntityStatus(player, (byte) 30);
             player.getItemCooldownManager().set(Items.SHIELD, breaker.getShieldCooldown());
         }
+    }
+    @ModifyReturnValue(method = "getDisplayName", at = @At("RETURN"))
+    public Text citrine$getStyledName(Text original) {
+        if (Citrine.CITRINE_SUPPORTERS.isSupporter(this.getUuid())){
+            return SupporterUtils.getStyledName(this.getUuid(), original);
+        }
+        return original;
     }
 }

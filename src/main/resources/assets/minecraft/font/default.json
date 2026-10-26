@@ -1,0 +1,13 @@
+{
+  "providers": [
+    {
+      "type": "bitmap",
+      "file": "citrine:font/supporter.png",
+      "ascent": 8,
+      "height": 8,
+      "chars": [
+        "\uE782"
+      ]
+    }
+  ]
+}

@@ -1,11 +1,14 @@
 package org.carpentry.citrine.api.util;
 
+import net.minecraft.text.Text;
+import org.carpentry.citrine.Citrine;
 import org.carpentry.citrine.api.supporter.SupporterList;
 import org.carpentry.citrine.api.supporter.SupporterRefreshManager;
 
 import java.net.URI;
 import java.time.Duration;
 import java.util.Objects;
+import java.util.UUID;
 
 public final class SupporterUtils {
     private SupporterUtils() {}
@@ -56,6 +59,17 @@ public final class SupporterUtils {
      */
     public static void shutdown() {
         SupporterRefreshManager.shutdown();
+    }
+
+    public static Text getStyledName(UUID playerUuid, Text text) {
+        if (!Citrine.CITRINE_SUPPORTERS.isSupporter(playerUuid)) {
+            return text;
+        }
+
+        return text.copy().append(
+                Text.literal("\uE782")
+                        .styled(style -> style.withColor(0xF8A73A))
+        );
     }
 }
 // Actual black magic please let me never do this shit again
