@@ -57,7 +57,7 @@ public class Citrine implements ModInitializer {
 		LOGGER.info("Citrine initialized.");
 	}
 
-	//TODO: Particle utils, custom font support, renderers 😭😭😭
+	//TODO: Particle utils, custom font support 😭😭😭
 
 	public static Identifier id(String path) {
 		return new Identifier(MOD_ID, path);
