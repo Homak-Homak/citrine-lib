@@ -14,7 +14,7 @@
     "requireAnnotations": true
   },
   "client": [
-    "PlayerListEntryMixin",
+    "client.PlayerListHudMixin",
     "client.ClientPlayerEntityMixin",
     "client.DrawContextMixin",
     "client.ItemRendererAccessor",
