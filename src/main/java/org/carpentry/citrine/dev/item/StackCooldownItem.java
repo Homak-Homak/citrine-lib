@@ -39,7 +39,7 @@ public class StackCooldownItem extends SwordItem implements OnCritItem, ShieldBr
             //ScreenFlashManager.addFlash(40, Citrine.id("textures/test/gothamchess_whythefucknot.png"), EasingType.QUAD);
         }
         if (!world.isClient) {
-            NetworkedScreenFlashManager.sendFlash(world.getPlayers().stream().collect(Collectors.toUnmodifiableList()), 40, Citrine.id("textures/test/gothamchess_whythefucknot.png"), EasingType.QUAD);
+            NetworkedScreenFlashManager.sendFlash(world.getPlayers().stream().toList(), 40, Citrine.id("textures/test/gothamchess_whythefucknot.png"), EasingType.QUAD);
         }
         return TypedActionResult.consume(stack);
     }

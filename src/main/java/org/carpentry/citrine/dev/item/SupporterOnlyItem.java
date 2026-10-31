@@ -10,13 +10,15 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.world.World;
 import org.carpentry.citrine.Citrine;
+import org.carpentry.citrine.api.client.shake.NetworkedScreenShake;
 import org.carpentry.citrine.api.cooldown.StackCooldownManager;
 import org.carpentry.citrine.api.util.EasingType;
 import org.carpentry.citrine.api.util.TimeUtils;
 import org.carpentry.citrine.api.util.particles.ParticleBuilder;
 import org.carpentry.citrine.api.util.schedule.TickSchedulerServer;
-import org.carpentry.citrine.api.client.shake.NetworkedScreenShake;
 import org.carpentry.citrine.api.util.particles.CitrineParticles;
+
+import java.awt.*;
 
 public class SupporterOnlyItem extends Item {
     public SupporterOnlyItem(Settings settings) {
@@ -32,18 +34,18 @@ public class SupporterOnlyItem extends Item {
                 for (ServerPlayerEntity sPlayer : user.getWorld().getEntitiesByClass(ServerPlayerEntity.class,
                         user.getBoundingBox().expand(20),
                         ServerPlayerEntity::isAlive)){
-                    NetworkedScreenShake.shake(sPlayer, EasingType.LINEAR, 1, TimeUtils.seconds(3));
-                    ParticleBuilder.create(CitrineParticles.DUST)
-                            .lifetime(TimeUtils.seconds(2))
-                            .scale(2f, 0f)
-                            .color(0xFF004F, 0xFFFFFF)
+                    ParticleBuilder.create(CitrineParticles.GENERIC)
+                            .lifetime(TimeUtils.seconds(5))
+                            .scale(1, 1)
+                            .color(new Color(0xff004f).getRGB(), new Color(0x4B0B25).getRGB())
                             .alpha(1f, 0f)
                             .spin(0.5f)
                             .gravity(1f)
-                            .motion(0, 0.2, 0)
-                            .randomMotion(0.2)
+                            .motion(0, 0.5, 0)
+                            .randomMotion(0.2f)
                             .fullBright()
-                            .spawn(world, user.getPos().x, user.getPos().y + user.getHeight()/2, user.getPos().z, 12);
+                            .spawn(world, user.getPos().x, user.getPos().y + user.getHeight()/2, user.getPos().z, 16);
+                    NetworkedScreenShake.shake(sPlayer, EasingType.LINEAR, 2, TimeUtils.seconds(5));
                 }
             }
         } else {
@@ -51,6 +53,6 @@ public class SupporterOnlyItem extends Item {
             StackCooldownManager.setCooldown(world, stack, TimeUtils.seconds(30));
             TickSchedulerServer.schedule(TimeUtils.seconds(5), user::kill);
         }
-        return TypedActionResult.consume(stack);
+        return TypedActionResult.pass(stack);
     }
 }

@@ -35,7 +35,7 @@ public final class ParticleBuilder {
     public ParticleBuilder motion(double x, double y, double z) { mx = x; my = y; mz = z; return this; }
     public ParticleBuilder randomMotion(double amount)      { this.randomMotion = amount; return this; }
 
-    /** The effect only: motion isn't part of it, it's a spawn argument. */
+    // The effect only. motion isnt part of it, it's a spawn argument.
     public CitrineParticleEffect build() {
         return new CitrineParticleEffect(type, new ParticleProperties(
                 lifetime, startScale, endScale, startColor, endColor, startAlpha, endAlpha,

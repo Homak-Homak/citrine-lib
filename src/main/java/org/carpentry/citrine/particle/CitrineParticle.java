@@ -15,7 +15,7 @@ public class CitrineParticle extends SpriteBillboardParticle {
     protected CitrineParticle(ClientWorld world, double x, double y, double z,
                               double vx, double vy, double vz,
                               CitrineParticleEffect effect, SpriteProvider sprites) {
-        super(world, x, y, z); // not the velocity ctor: that one randomizes velocity
+        super(world, x, y, z); // not the velocity ctor, that randomizes velocity
         this.p = effect.props();
 
         this.velocityX = vx;
@@ -41,7 +41,7 @@ public class CitrineParticle extends SpriteBillboardParticle {
     public void tick() {
         this.prevAngle = this.angle;
         this.angle += p.spin();
-        super.tick(); // age, gravity, drag, movement, collision
+        super.tick();
 
         float t = Math.min(1f, (float) age / maxAge);
         this.setColor(MathHelper.lerp(t, r0, r1), MathHelper.lerp(t, g0, g1), MathHelper.lerp(t, b0, b1));

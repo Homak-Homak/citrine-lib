@@ -32,7 +32,7 @@ public class CitrineClient implements ClientModInitializer {
             Identifier img = buf.readIdentifier();
             int easing = buf.readInt();
             client.execute(() -> {
-                EasingType type = EasingType.values()[easing - 1];
+                EasingType type = EasingType.values()[easing];
                 ScreenFlashManager.addFlash((float) ticks, img, type);
             });
         });
@@ -41,7 +41,7 @@ public class CitrineClient implements ClientModInitializer {
             int color = buf.readInt();
             int easing = buf.readInt();
             client.execute(() -> {
-                EasingType type = EasingType.values()[easing - 1];
+                EasingType type = EasingType.values()[easing];
                 ScreenFlashManager.addFlash((float) ticks, new Color(color), type);
             });
         });
