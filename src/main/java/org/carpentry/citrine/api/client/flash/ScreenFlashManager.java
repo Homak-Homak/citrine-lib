@@ -2,6 +2,7 @@ package org.carpentry.citrine.api.client.flash;
 
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.util.Identifier;
+import org.carpentry.citrine.api.util.EasingType;
 
 import java.awt.Color;
 import java.util.List;
@@ -10,7 +11,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 public class ScreenFlashManager {
     private static final List<ScreenFlash> activeFlashes = new CopyOnWriteArrayList<>();
 
-    public static void addFlash(float ticks, Color color, FlashEasingType type) {
+    public static void addFlash(float ticks, Color color, EasingType type) {
         MinecraftClient c = MinecraftClient.getInstance();
         if (c.world == null) return;
 
@@ -19,7 +20,7 @@ public class ScreenFlashManager {
         activeFlashes.add(flash);
     }
 
-    public static void addFlash(float ticks, Identifier img, FlashEasingType type) {
+    public static void addFlash(float ticks, Identifier img, EasingType type) {
         MinecraftClient c = MinecraftClient.getInstance();
         if (c.world == null) return;
 

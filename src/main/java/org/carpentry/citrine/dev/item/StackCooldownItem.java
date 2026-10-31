@@ -1,8 +1,6 @@
 package org.carpentry.citrine.dev.item;
 
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.damage.DamageSource;
-import net.minecraft.entity.damage.DamageSources;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
@@ -14,15 +12,12 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.world.World;
 import org.carpentry.citrine.Citrine;
-import org.carpentry.citrine.api.client.flash.FlashEasingType;
+import org.carpentry.citrine.api.util.EasingType;
 import org.carpentry.citrine.api.client.flash.ScreenFlashManager;
 import org.carpentry.citrine.api.cooldown.StackCooldownManager;
-import org.carpentry.citrine.api.item.CustomKillSourceItem;
 import org.carpentry.citrine.api.item.OnCritItem;
 import org.carpentry.citrine.api.item.ShieldBreakerItem;
 import org.carpentry.citrine.api.util.TimeUtils;
-
-import java.awt.*;
 
 public class StackCooldownItem extends SwordItem implements OnCritItem, ShieldBreakerItem{
     public StackCooldownItem(Settings settings) {
@@ -37,8 +32,8 @@ public class StackCooldownItem extends SwordItem implements OnCritItem, ShieldBr
         user.sendMessage(Text.literal("Augh"), true);
 
         if (world.isClient) {
-            // ScreenFlashManager.addFlash(TimeUtils.seconds(6.7f), new Color(0xff004f), FlashEasingType.LINEAR);
-             ScreenFlashManager.addFlash(40, Citrine.id("textures/test/gothamchess_whythefucknot.png"), FlashEasingType.QUAD);
+            // ScreenFlashManager.addFlash(TimeUtils.seconds(6.7f), new Color(0xff004f), EasingType.LINEAR);
+             ScreenFlashManager.addFlash(40, Citrine.id("textures/test/gothamchess_whythefucknot.png"), EasingType.QUAD);
         }
 
         return TypedActionResult.consume(stack);

@@ -1,8 +1,8 @@
-package org.carpentry.citrine.api.client.flash;
+package org.carpentry.citrine.api.util;
 
 import java.util.function.Function;
 
-public enum FlashEasingType {
+public enum EasingType {
     LINEAR(in -> in),
     QUAD(in -> in * in),
     CUBIC(in -> in * in * in),
@@ -13,7 +13,7 @@ public enum FlashEasingType {
 
     private final Function<Float, Float> func;
 
-    FlashEasingType(Function<Float, Float> func) {
+    EasingType(Function<Float, Float> func) {
         this.func = func;
     }
 

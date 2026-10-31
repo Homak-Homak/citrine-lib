@@ -14,13 +14,14 @@
     "requireAnnotations": true
   },
   "client": [
-    "client.PlayerListHudMixin",
+    "client.CameraMixin",
     "client.ClientPlayerEntityMixin",
     "client.DrawContextMixin",
     "client.ItemRendererAccessor",
     "client.ItemRendererMixin",
     "client.ModelLoaderMixin",
     "client.PlayerEntityRendererMixin",
+    "client.PlayerListHudMixin",
     "client.VaryingModelItemRendererMixin"
   ]
 }

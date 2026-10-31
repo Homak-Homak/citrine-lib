@@ -11,6 +11,7 @@ import org.carpentry.citrine.dev.CitrineEffects;
 import org.carpentry.citrine.dev.CitrineItems;
 import org.carpentry.citrine.api.item.OnKillItem;
 import org.carpentry.citrine.api.item.OnUserDeathItem;
+import org.carpentry.citrine.api.util.particles.CitrineParticles;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -27,8 +28,10 @@ public class Citrine implements ModInitializer {
 	);
 	// The supporter system genuinely has to be one of the most BULLSHIT things ive ever fucking coded 💔
 	// but if it works it works ig :pray:
+
 	@Override
 	public void onInitialize() {
+		CitrineParticles.init();
 
 		if (FabricLoader.getInstance().isDevelopmentEnvironment()) {
 			CitrineItems.init();
@@ -57,7 +60,7 @@ public class Citrine implements ModInitializer {
 		LOGGER.info("Citrine initialized.");
 	}
 
-	//TODO: Particle utils, custom font support 😭😭😭
+	//TODO: custom font support 😭😭😭
 
 	public static Identifier id(String path) {
 		return new Identifier(MOD_ID, path);
