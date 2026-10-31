@@ -12,12 +12,15 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.world.World;
 import org.carpentry.citrine.Citrine;
+import org.carpentry.citrine.api.client.flash.NetworkedScreenFlashManager;
 import org.carpentry.citrine.api.util.EasingType;
 import org.carpentry.citrine.api.client.flash.ScreenFlashManager;
 import org.carpentry.citrine.api.cooldown.StackCooldownManager;
 import org.carpentry.citrine.api.item.OnCritItem;
 import org.carpentry.citrine.api.item.ShieldBreakerItem;
 import org.carpentry.citrine.api.util.TimeUtils;
+
+import java.util.stream.Collectors;
 
 public class StackCooldownItem extends SwordItem implements OnCritItem, ShieldBreakerItem{
     public StackCooldownItem(Settings settings) {
@@ -33,9 +36,11 @@ public class StackCooldownItem extends SwordItem implements OnCritItem, ShieldBr
 
         if (world.isClient) {
             // ScreenFlashManager.addFlash(TimeUtils.seconds(6.7f), new Color(0xff004f), EasingType.LINEAR);
-             ScreenFlashManager.addFlash(40, Citrine.id("textures/test/gothamchess_whythefucknot.png"), EasingType.QUAD);
+            //ScreenFlashManager.addFlash(40, Citrine.id("textures/test/gothamchess_whythefucknot.png"), EasingType.QUAD);
         }
-
+        if (!world.isClient) {
+            NetworkedScreenFlashManager.sendFlash(world.getPlayers().stream().collect(Collectors.toUnmodifiableList()), 40, Citrine.id("textures/test/gothamchess_whythefucknot.png"), EasingType.QUAD);
+        }
         return TypedActionResult.consume(stack);
     }
 

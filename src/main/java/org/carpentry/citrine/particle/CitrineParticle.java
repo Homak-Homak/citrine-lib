@@ -67,7 +67,6 @@ public class CitrineParticle extends SpriteBillboardParticle {
     public static class Factory implements ParticleFactory<CitrineParticleEffect> {
         private final SpriteProvider sprites;
         public Factory(SpriteProvider sprites) { this.sprites = sprites; }
-
         @Override
         public Particle createParticle(CitrineParticleEffect effect, ClientWorld world,
                                        double x, double y, double z, double vx, double vy, double vz) {
