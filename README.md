@@ -11,7 +11,7 @@ maven {
 ```
 Then, add the dependency:
 
-`modImplementation "maven.modrinth:citrine:${project.citrine_ver}"`
+`modImplementation "maven.modrinth:citrine-lib:${project.citrine_ver}"`
 
 ## Utilities Provided
 
