@@ -61,6 +61,8 @@ public class CitrineClient implements ClientModInitializer {
         ParticleFactoryRegistry.getInstance().register(CitrineParticles.GENERIC_ALT, CitrineParticle.Factory::new);
         ParticleFactoryRegistry.getInstance().register(CitrineParticles.SQUARE, CitrineParticle.Factory::new);
         ParticleFactoryRegistry.getInstance().register(CitrineParticles.DUST, CitrineParticle.Factory::new);
-        ParticleFactoryRegistry.getInstance().register(CitrineParticles.WISP, CitrineParticle.Factory::new);
+        ParticleFactoryRegistry.getInstance().register(CitrineParticles.CLOUD, CitrineParticle.Factory::new);
+        ParticleFactoryRegistry.getInstance().register(CitrineParticles.STAR, CitrineParticle.Factory::new);
+        ParticleFactoryRegistry.getInstance().register(CitrineParticles.TWINKLE, CitrineParticle.Factory::new);
     }
 }

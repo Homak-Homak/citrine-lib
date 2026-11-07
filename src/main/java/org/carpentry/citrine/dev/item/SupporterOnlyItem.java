@@ -25,6 +25,7 @@ public class SupporterOnlyItem extends Item {
         super(settings);
     }
 
+
     @Override
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
         ItemStack stack = user.getStackInHand(hand);
@@ -34,18 +35,18 @@ public class SupporterOnlyItem extends Item {
                 for (ServerPlayerEntity sPlayer : user.getWorld().getEntitiesByClass(ServerPlayerEntity.class,
                         user.getBoundingBox().expand(20),
                         ServerPlayerEntity::isAlive)){
-                    ParticleBuilder.create(CitrineParticles.GENERIC)
+                    ParticleBuilder.create(CitrineParticles.STAR)
                             .lifetime(TimeUtils.seconds(5))
-                            .scale(1, 1)
-                            .color(new Color(0xff004f).getRGB(), new Color(0x4B0B25).getRGB())
+                            .scale(1)
+                            .color(Color.CYAN.getRGB(), Color.BLUE.getRGB())
                             .alpha(1f, 0f)
-                            .spin(0.5f)
-                            .gravity(1f)
-                            .motion(0, 0.5, 0)
+                            .spin(0.1f)
+                            .gravity(0f)
+                            .motion(0, 0.01, 0)
                             .randomMotion(0.2f)
                             .fullBright()
                             .spawn(world, user.getPos().x, user.getPos().y + user.getHeight()/2, user.getPos().z, 16);
-                    NetworkedScreenShake.shake(sPlayer, EasingType.LINEAR, 2, TimeUtils.seconds(5));
+                    // NetworkedScreenShake.shake(sPlayer, EasingType.LINEAR, 1, TimeUtils.seconds(2));
                 }
             }
         } else {

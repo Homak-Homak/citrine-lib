@@ -22,13 +22,17 @@ public final class CitrineParticles {
     public static ParticleType<CitrineParticleEffect> GENERIC_ALT;
     public static ParticleType<CitrineParticleEffect> SQUARE;
     public static ParticleType<CitrineParticleEffect> DUST;
-    public static ParticleType<CitrineParticleEffect> WISP;
+    public static ParticleType<CitrineParticleEffect> CLOUD;
+    public static ParticleType<CitrineParticleEffect> STAR;
+    public static ParticleType<CitrineParticleEffect> TWINKLE;
 
     public static void init() {
         GENERIC = register(Citrine.id("generic"));
         GENERIC_ALT = register(Citrine.id("generic_alt"));
         SQUARE = register(Citrine.id("square"));
         DUST = register(Citrine.id("dust"));
-        WISP = register(Citrine.id("wisp"));
+        CLOUD = register(Citrine.id("cloud"));
+        STAR = register(Citrine.id("star"));
+        TWINKLE = register(Citrine.id("twinkle"));
     }
 }
