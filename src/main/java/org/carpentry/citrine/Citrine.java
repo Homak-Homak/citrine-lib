@@ -12,6 +12,7 @@ import org.carpentry.citrine.dev.CitrineItems;
 import org.carpentry.citrine.api.item.OnKillItem;
 import org.carpentry.citrine.api.item.OnUserDeathItem;
 import org.carpentry.citrine.api.util.particles.CitrineParticles;
+import org.carpentry.citrine.dev.RegistrantTest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -36,6 +37,7 @@ public class Citrine implements ModInitializer {
 		if (FabricLoader.getInstance().isDevelopmentEnvironment()) {
 			CitrineItems.init();
 			CitrineEffects.init();
+			RegistrantTest.init();
 		}
 
 		ServerLivingEntityEvents.ALLOW_DEATH.register(((target, damageSource, damageAmount) -> {
