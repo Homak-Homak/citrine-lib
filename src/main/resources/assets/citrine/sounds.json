@@ -1,0 +1,8 @@
+{
+  "regtest": {
+    "subtitle": "subtitle.citrine.regtest",
+    "sounds": [
+      "minecraft:block.bell.resonate"
+    ]
+  }
+}

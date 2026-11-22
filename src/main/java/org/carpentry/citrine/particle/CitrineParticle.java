@@ -1,8 +1,12 @@
 package org.carpentry.citrine.particle;
 
+import com.mojang.blaze3d.systems.RenderSystem;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.particle.*;
+import net.minecraft.client.render.*;
+import net.minecraft.client.texture.SpriteAtlasTexture;
+import net.minecraft.client.texture.TextureManager;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.util.math.MathHelper;
 import org.carpentry.citrine.api.util.particles.ParticleProperties;
@@ -61,7 +65,7 @@ public class CitrineParticle extends SpriteBillboardParticle {
 
     @Override
     public ParticleTextureSheet getType() {
-        return ParticleTextureSheet.PARTICLE_SHEET_TRANSLUCENT;
+        return CitrineParticleSheets.TRANSLUCENT_NO_DEPTH;
     }
 
     public static class Factory implements ParticleFactory<CitrineParticleEffect> {
