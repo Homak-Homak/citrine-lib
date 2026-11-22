@@ -12,7 +12,7 @@ public class TestShaderCallback implements HudRenderCallback {
     @Override
     public void onHudRender(DrawContext ctx, float tickDelta) {
         if (MinecraftClient.getInstance().player.getMainHandStack().isOf(CitrineItems.SHADER)) {
-            SHADER.draw(ctx, ctx.getScaledWindowWidth() / 2f, ctx.getScaledWindowHeight() / 2f, 100, 100);
+            SHADER.draw(ctx, ctx.getScaledWindowWidth() / 2f - 250, ctx.getScaledWindowHeight() / 2f - 250, 500, 500);
         }
     }
 }
