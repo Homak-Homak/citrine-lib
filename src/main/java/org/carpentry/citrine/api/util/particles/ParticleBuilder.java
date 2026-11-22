@@ -1,9 +1,13 @@
 package org.carpentry.citrine.api.util.particles;
 
 import net.minecraft.particle.ParticleType;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.world.World;
 import org.carpentry.citrine.particle.CitrineParticleEffect;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public final class ParticleBuilder {
     private final ParticleType<CitrineParticleEffect> type;
@@ -14,6 +18,7 @@ public final class ParticleBuilder {
     private float rotation, spin, gravity, drag = 0.98f;
     private boolean fullBright, collision = true;
     private boolean additive;
+    private double viewDistance = 32.0;
 
 
     private double mx, my, mz, randomMotion;
@@ -37,6 +42,7 @@ public final class ParticleBuilder {
     public ParticleBuilder additive()                       { this.additive = true; return this; }
     public ParticleBuilder noCollision()                    { this.collision = false; return this; }
     public ParticleBuilder motion(double x, double y, double z) { mx = x; my = y; mz = z; return this; }
+    public ParticleBuilder viewDistance(double blocks)      {this.viewDistance = Math.min(blocks, 512.0);return this;}
     public ParticleBuilder randomMotion(double amount)      { this.randomMotion = amount; return this; }
 
     // The effect only. motion isnt part of it, it's a spawn argument.
@@ -50,14 +56,29 @@ public final class ParticleBuilder {
 
     public void spawn(World world, double x, double y, double z, int count) {
         CitrineParticleEffect effect = build();
+
+        ServerWorld serverWorld = world instanceof ServerWorld sw ? sw : null;
+        List<ServerPlayerEntity> viewers = null;
+
+        if (serverWorld != null) {
+            viewers = new ArrayList<>();
+            double maxSq = viewDistance * viewDistance;
+            for (ServerPlayerEntity player : serverWorld.getPlayers()) {
+                if (player.squaredDistanceTo(x, y, z) <= maxSq) viewers.add(player);
+            }
+            if (viewers.isEmpty()) return; // nobody in range, skip the work
+        }
+
         for (int i = 0; i < count; i++) {
             double vx = mx + (world.random.nextDouble() * 2 - 1) * randomMotion;
             double vy = my + (world.random.nextDouble() * 2 - 1) * randomMotion;
             double vz = mz + (world.random.nextDouble() * 2 - 1) * randomMotion;
 
-            if (world instanceof ServerWorld serverWorld) {
-                // count 0 means delta is the velocity
-                serverWorld.spawnParticles(effect, x, y, z, 0, vx, vy, vz, 1.0);
+            if (serverWorld != null) {
+                for (ServerPlayerEntity player : viewers) {
+                    // force = true: lets vanilla send up to 512 blocks and flags it as long-distance
+                    serverWorld.spawnParticles(player, effect, true, x, y, z, 0, vx, vy, vz, 1.0);
+                }
             } else {
                 world.addParticle(effect, x, y, z, vx, vy, vz);
             }
