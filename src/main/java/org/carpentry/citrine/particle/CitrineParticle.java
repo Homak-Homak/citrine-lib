@@ -65,7 +65,7 @@ public class CitrineParticle extends SpriteBillboardParticle {
 
     @Override
     public ParticleTextureSheet getType() {
-        return CitrineParticleSheets.TRANSLUCENT_NO_DEPTH;
+        return p.additive() ? CitrineParticleSheets.ADDITIVE : CitrineParticleSheets.TRANSLUCENT_NO_DEPTH;
     }
 
     public static class Factory implements ParticleFactory<CitrineParticleEffect> {

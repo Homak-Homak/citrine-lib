@@ -13,6 +13,9 @@ public final class ParticleBuilder {
     private float startAlpha = 1f, endAlpha = 1f;
     private float rotation, spin, gravity, drag = 0.98f;
     private boolean fullBright, collision = true;
+    private boolean additive;
+
+
     private double mx, my, mz, randomMotion;
 
     private ParticleBuilder(ParticleType<CitrineParticleEffect> type) { this.type = type; }
@@ -31,6 +34,7 @@ public final class ParticleBuilder {
     public ParticleBuilder gravity(float g)                 { this.gravity = g; return this; }
     public ParticleBuilder drag(float multiplier)           { this.drag = multiplier; return this; }
     public ParticleBuilder fullBright()                     { this.fullBright = true; return this; }
+    public ParticleBuilder additive()                       { this.additive = true; return this; }
     public ParticleBuilder noCollision()                    { this.collision = false; return this; }
     public ParticleBuilder motion(double x, double y, double z) { mx = x; my = y; mz = z; return this; }
     public ParticleBuilder randomMotion(double amount)      { this.randomMotion = amount; return this; }
@@ -39,7 +43,7 @@ public final class ParticleBuilder {
     public CitrineParticleEffect build() {
         return new CitrineParticleEffect(type, new ParticleProperties(
                 lifetime, startScale, endScale, startColor, endColor, startAlpha, endAlpha,
-                rotation, spin, gravity, drag, fullBright, collision));
+                rotation, spin, gravity, drag, fullBright, collision, additive));
     }
 
     public void spawn(World world, double x, double y, double z) { spawn(world, x, y, z, 1); }

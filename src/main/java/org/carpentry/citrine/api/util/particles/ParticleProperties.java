@@ -11,10 +11,10 @@ public record ParticleProperties(
         float startAlpha, float endAlpha,
         float rotation, float spin,         // radians, radians per tick
         float gravity, float drag,
-        boolean fullBright, boolean collision
+        boolean fullBright, boolean collision, boolean additive
 ) {
     public static final ParticleProperties DEFAULT = new ParticleProperties(
-            20, 0.1f, 0.1f, 0xFFFFFF, 0xFFFFFF, 1f, 1f, 0f, 0f, 0f, 0.98f, false, true);
+            20, 0.1f, 0.1f, 0xFFFFFF, 0xFFFFFF, 1f, 1f, 0f, 0f, 0f, 0.98f, false, true, false);
 
     public static final Codec<ParticleProperties> CODEC = RecordCodecBuilder.create(i -> i.group(
             Codec.INT.fieldOf("lifetime").forGetter(ParticleProperties::lifetime),
@@ -29,7 +29,8 @@ public record ParticleProperties(
             Codec.FLOAT.fieldOf("gravity").forGetter(ParticleProperties::gravity),
             Codec.FLOAT.fieldOf("drag").forGetter(ParticleProperties::drag),
             Codec.BOOL.fieldOf("full_bright").forGetter(ParticleProperties::fullBright),
-            Codec.BOOL.fieldOf("collision").forGetter(ParticleProperties::collision)
+            Codec.BOOL.fieldOf("collision").forGetter(ParticleProperties::collision),
+            Codec.BOOL.optionalFieldOf("additive", false).forGetter(ParticleProperties::additive)
     ).apply(i, ParticleProperties::new));
 
     public void write(PacketByteBuf buf) {
@@ -40,6 +41,7 @@ public record ParticleProperties(
         buf.writeFloat(rotation);   buf.writeFloat(spin);
         buf.writeFloat(gravity);    buf.writeFloat(drag);
         buf.writeBoolean(fullBright); buf.writeBoolean(collision);
+        buf.writeBoolean(additive);
     }
 
     public static ParticleProperties read(PacketByteBuf buf) {
@@ -50,6 +52,7 @@ public record ParticleProperties(
                 buf.readFloat(), buf.readFloat(),
                 buf.readFloat(), buf.readFloat(),
                 buf.readFloat(), buf.readFloat(),
-                buf.readBoolean(), buf.readBoolean());
+                buf.readBoolean(), buf.readBoolean(),
+                buf.readBoolean());
     }
 }

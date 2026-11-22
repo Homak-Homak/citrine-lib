@@ -27,6 +27,8 @@ public abstract class ParticleManagerMixin {
         PARTICLE_TEXTURE_SHEETS = ImmutableList.<ParticleTextureSheet>builder()
                 .addAll(PARTICLE_TEXTURE_SHEETS)
                 .add(CitrineParticleSheets.TRANSLUCENT_NO_DEPTH)
+                .add(CitrineParticleSheets.TRANSLUCENT_NO_DEPTH)
+                .add(CitrineParticleSheets.ADDITIVE)
                 .build();
     }
 }
