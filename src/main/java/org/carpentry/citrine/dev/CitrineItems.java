@@ -15,6 +15,7 @@ public class CitrineItems {
     public static final Item STACK_COOLDOWN = registerItem("stack_cooldown", new StackCooldownItem(new Item.Settings()));
     public static final Item USE_SPRINT = registerItem("use_sprint", new UseWhileSprintItem(new Item.Settings()));
     public static final Item SKINS = registerItem("skins", new SkinsItem(new Item.Settings()));
+    public static final Item SHADER = registerItem("shader", new ShaderItem(new Item.Settings()));
     public static final Item MANY_MODELS = registerItem("models", new ManyModelsItem(new Item.Settings()));
     public static final Item SPEAR = registerItem("spear", new TestSpearItem(new Item.Settings()));
     public static final Item SUPPORTER = registerItem("supporter", new SupporterOnlyItem(new Item.Settings()));

@@ -14,7 +14,10 @@ import org.carpentry.citrine.api.client.shake.ScreenShakeManager;
 import org.carpentry.citrine.api.render.CubeRenderer;
 import org.carpentry.citrine.api.render.QuadRenderer;
 import org.carpentry.citrine.api.util.EasingType;
+import org.carpentry.citrine.api.util.MiscDevUtils;
 import org.carpentry.citrine.api.util.particles.CitrineParticles;
+import org.carpentry.citrine.dev.CitrineShaders;
+import org.carpentry.citrine.dev.TestShaderCallback;
 import org.carpentry.citrine.particle.CitrineParticle;
 
 import java.awt.*;
@@ -26,6 +29,10 @@ public class CitrineClient implements ClientModInitializer {
     public static final Identifier FLASH_COL_PACKET = Citrine.id("flashc");
     @Override
     public void onInitializeClient() {
+        if (MiscDevUtils.isDev()) {
+            CitrineShaders.init();
+            HudRenderCallback.EVENT.register(new TestShaderCallback());
+        }
         HudRenderCallback.EVENT.register(new ScreenFlashHudElement());
         ClientPlayNetworking.registerGlobalReceiver(FLASH_IMG_PACKET, (client, handler, buf, responseSender) -> {
             int ticks = buf.readInt();
