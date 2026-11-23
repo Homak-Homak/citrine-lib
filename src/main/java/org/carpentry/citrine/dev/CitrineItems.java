@@ -34,6 +34,7 @@ public class CitrineItems {
             entries.add(SKINS);
             entries.add(MANY_MODELS);
             entries.add(SUPPORTER);
+            entries.add(SHADER);
         }));
     }
 }
