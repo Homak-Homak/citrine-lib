@@ -19,6 +19,7 @@ modImplementation "maven.modrinth:citrine-lib:${project.citrine_ver}"
 
 - Screen Shake
 - Screen Flash
+- GPU Shader Rendering
 - Stack-based ItemCooldownManager
 - Unclearable Status Effects
 - Multi-model Item system
