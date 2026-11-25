@@ -14,15 +14,16 @@
     "requireAnnotations": true
   },
   "client": [
-    "client.ParticleManagerMixin",
     "client.CameraMixin",
     "client.ClientPlayerEntityMixin",
     "client.DrawContextMixin",
     "client.ItemRendererAccessor",
     "client.ItemRendererMixin",
     "client.ModelLoaderMixin",
+    "client.ParticleManagerMixin",
     "client.PlayerEntityRendererMixin",
     "client.PlayerListHudMixin",
+    "client.TextRendererDrawerMixin",
     "client.VaryingModelItemRendererMixin"
   ]
 }
