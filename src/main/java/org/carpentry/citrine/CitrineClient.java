@@ -11,6 +11,7 @@ import org.carpentry.citrine.api.client.flash.ScreenFlashHudElement;
 import org.carpentry.citrine.api.client.flash.ScreenFlashManager;
 import org.carpentry.citrine.api.client.shake.ScreenShakeInstance;
 import org.carpentry.citrine.api.client.shake.ScreenShakeManager;
+import org.carpentry.citrine.api.client.text.TextEffects;
 import org.carpentry.citrine.api.render.CubeRenderer;
 import org.carpentry.citrine.api.render.QuadRenderer;
 import org.carpentry.citrine.api.util.EasingType;
@@ -71,5 +72,6 @@ public class CitrineClient implements ClientModInitializer {
         ParticleFactoryRegistry.getInstance().register(CitrineParticles.CLOUD, CitrineParticle.Factory::new);
         ParticleFactoryRegistry.getInstance().register(CitrineParticles.STAR, CitrineParticle.Factory::new);
         ParticleFactoryRegistry.getInstance().register(CitrineParticles.TWINKLE, CitrineParticle.Factory::new);
+        TextEffects.init();
     }
 }
